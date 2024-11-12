@@ -14,19 +14,19 @@ def split_data():
     for CLASS in os.listdir(IMG_PATH):
         if not CLASS.startswith("."):
             class_dir = os.path.join(IMG_PATH, CLASS)
-            os.makedirs(f"data/test/{CLASS.upper()}", exist_ok=True)
-            os.makedirs(f"data/train/{CLASS.upper()}", exist_ok=True)
-            os.makedirs(f"data/val/{CLASS.upper()}", exist_ok=True)
+            os.makedirs(f"data/test/{CLASS}", exist_ok=True)
+            os.makedirs(f"data/train/{CLASS}", exist_ok=True)
+            os.makedirs(f"data/val/{CLASS}", exist_ok=True)
 
             IMG_NUM = len(os.listdir(class_dir))
             for n, FILE_NAME in enumerate(os.listdir(class_dir)):
                 img = os.path.join(class_dir, FILE_NAME)
-                if n < 5:
-                    shutil.copy(img, f"data/test/{CLASS.upper()}/{FILE_NAME}")
-                elif n < 0.8 * IMG_NUM:
-                    shutil.copy(img, f"data/train/{CLASS.upper()}/{FILE_NAME}")
+                if n < 0.8 * IMG_NUM:
+                    shutil.copy(img, f"data/train/{CLASS}/{FILE_NAME}")
+                elif 0.8 * IMG_NUM <= n < 0.9 * IMG_NUM:
+                    shutil.copy(img, f"data/test/{CLASS}/{FILE_NAME}")
                 else:
-                    shutil.copy(img, f"data/val/{CLASS.upper()}/{FILE_NAME}")
+                    shutil.copy(img, f"data/val/{CLASS}/{FILE_NAME}")
 
 
 def resize_images(target_size=TARGET_SIZE):
