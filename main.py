@@ -15,23 +15,18 @@ def main():
     args = get_args()
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    # Define your data directories
-    train_dir = "data/train"
-    val_dir = "data/val"
-    test_dir = "data/test"
+    # Display sample images from the train set
+    plot_sample_images(args.train_dir)
 
     # Visualize class distributions (with percentage and overall)
     plot_class_distribution(
-        [train_dir, val_dir, test_dir], ["Train", "Validation", "Test"]
+        [args.train_dir, args.val_dir, args.test_dir], ["Train", "Validation", "Test"]
     )
 
     # Visualize image size distributions
-    plot_image_size_distribution(train_dir)
-    plot_image_size_distribution(val_dir)
-    plot_image_size_distribution(test_dir)
-
-    # Display sample images from the train set
-    plot_sample_images(train_dir)
+    plot_image_size_distribution(args.train_dir)
+    plot_image_size_distribution(args.val_dir)
+    plot_image_size_distribution(args.test_dir)
 
     # Load data
     train_loader, val_loader, test_loader = get_dataloaders(

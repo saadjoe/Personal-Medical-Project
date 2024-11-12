@@ -29,7 +29,6 @@ def split_data():
                     shutil.copy(img, f"data/val/{CLASS.upper()}/{FILE_NAME}")
 
 
-# Define the BrainMRIDataset class
 class BrainMRIDataset(Dataset):
     def __init__(self, data_dir, transform=None):
         self.data_dir = data_dir

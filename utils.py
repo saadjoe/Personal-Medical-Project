@@ -25,7 +25,7 @@ def plot_class_distribution(data_dirs, split_names):
         total = sum(class_counts.values())
         plt.figure(figsize=(8, 6))
         plt.bar(
-            class_counts.keys(),
+            list(class_counts.keys()),
             [(count / total) * 100 for count in class_counts.values()],
             color=["skyblue", "salmon"],
         )
@@ -38,7 +38,7 @@ def plot_class_distribution(data_dirs, split_names):
     total_sum = sum(total_counts.values())
     plt.figure(figsize=(8, 6))
     plt.bar(
-        total_counts.keys(),
+        list(total_counts.keys()),
         [(count / total_sum) * 100 for count in total_counts.values()],
         color=["skyblue", "salmon"],
     )
