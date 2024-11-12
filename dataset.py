@@ -6,7 +6,6 @@ from torch.utils.data import DataLoader, Dataset
 from torchvision import transforms
 
 IMG_PATH = "brain_tumor_dataset/"
-TARGET_SIZE = (224, 224)
 
 
 def split_data():
@@ -27,20 +26,6 @@ def split_data():
                     shutil.copy(img, f"data/test/{CLASS}/{FILE_NAME}")
                 else:
                     shutil.copy(img, f"data/val/{CLASS}/{FILE_NAME}")
-
-
-def resize_images(target_size=TARGET_SIZE):
-    # Resize all images to the target size
-    for class_dir in os.listdir(IMG_PATH):
-        if not class_dir.startswith("."):
-            class_path = os.path.join(IMG_PATH, class_dir)
-            for img_name in os.listdir(class_path):
-                img_path = os.path.join(class_path, img_name)
-                with Image.open(img_path) as img:
-                    # Resize and save the image
-                    resized_img = img.resize(target_size)
-                    resized_img.save(img_path)
-    print(f"All images resized to {target_size}.")
 
 
 class BrainMRIDataset(Dataset):
