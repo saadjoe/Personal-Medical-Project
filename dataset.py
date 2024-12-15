@@ -60,21 +60,21 @@ class BrainMRIDataset(Dataset):
 
 
 def get_dataloaders(train_dir, val_dir, test_dir, batch_size):
-    # Define the transformation for the images
     transform = transforms.Compose(
         [
-            transforms.Resize((224, 224)),
+            transforms.Resize((256, 256)),
+            transforms.RandomHorizontalFlip(p=0.5),
+            transforms.RandomVerticalFlip(p=0.5),
+            transforms.RandomRotation(30),
             transforms.ToTensor(),
-            transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5]),
+            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
         ]
     )
 
-    # Load datasets
     train_dataset = BrainMRIDataset(train_dir, transform=transform)
     val_dataset = BrainMRIDataset(val_dir, transform=transform)
     test_dataset = BrainMRIDataset(test_dir, transform=transform)
 
-    # Create data loaders
     train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
     val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False)
     test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
