@@ -17,9 +17,8 @@ def main():
     )
 
     model = get_model(fine_tune=args.fine_tune).to(device)
-    optimizer = torch.optim.RMSprop(model.parameters(), lr=args.learning_rate)
 
-    model = train_model(model, train_loader, val_loader, optimizer, device, args.epochs)
+    model = train_model(model, train_loader, device, args.epochs, args.learning_rate)
 
     test_acc, precision, recall, f1, confusion_matrix = evaluate_model(
         model, test_loader, device

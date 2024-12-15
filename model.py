@@ -15,7 +15,6 @@ def get_model(fine_tune=False):
         nn.ReLU(),
         nn.Dropout(0.5),
         nn.Linear(256, 1),
-        nn.Sigmoid(),
     )
 
     return model
